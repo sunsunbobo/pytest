@@ -1,6 +1,15 @@
-def func(x):
-    return x + 1
+import pytest
+import yaml
 
 
-def test_answer():
-    assert func(3) == 5
+class TestDemo:
+    @pytest.mark.parametrize("env", yaml.safe_load(open("./env.yaml")))
+    def test_demo(self,env):
+        if "test" in env:
+            print("这是测试环境")
+            print("测试环境的ip是：", env["test"])
+            print(env)
+        elif "dev" in env:
+            print("这是开发环境")
+            print("开发环境的ip是：", env["dev"])
+            print(env)
